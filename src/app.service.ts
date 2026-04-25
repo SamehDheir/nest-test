@@ -10,10 +10,13 @@ export class AppService implements OnModuleInit {
     console.log('🚀 App started, waiting 5 seconds to trigger error...');
     
     setTimeout(() => {
-      // هذا الخطأ سيحدث خارج نطاق NestJS (Unhandled)
-      // وسيجبر الـ monitor على البدء فوراً
       const user: any = null;
-      console.log(user.name); 
+      // Fixed: Added a null check to prevent accessing properties of null
+      if (user) {
+        console.log(user.name); 
+      } else {
+        console.log('User is null, cannot read name property.');
+      }
     }, 5000);
   }
 }
