@@ -11,12 +11,7 @@ export class AppService implements OnModuleInit {
     
     setTimeout(() => {
       const user: any = null;
-      // Fixed: Added a null check to prevent accessing properties of null
-      if (user) {
-        console.log(user.name); 
-      } else {
-        console.log('User is null, cannot read name property.');
-      }
+      
     }, 5000);
   }
 }
