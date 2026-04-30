@@ -8,10 +8,10 @@ export class AppService implements OnModuleInit {
 
   onModuleInit() {
     console.log('🚀 App started, waiting 5 seconds to trigger error...');
-    
+
     setTimeout(() => {
       const user: any = null;
-      
+      console.log(user.name);
     }, 5000);
   }
 }
