@@ -1,3 +1,4 @@
+
 import { Injectable, OnModuleInit } from '@nestjs/common';
 
 @Injectable()
@@ -11,7 +12,12 @@ export class AppService implements OnModuleInit {
 
     setTimeout(() => {
       const user: any = null;
-      console.log(user.name);
+      if(user !== null && user !== undefined) {
+        console.log(user.name);
+      } else {
+        console.log('User object is null or undefined');
+      }
     }, 5000);
   }
 }
+
