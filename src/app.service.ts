@@ -1,4 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+interface User {
+  name: string;
+}
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -10,7 +13,7 @@ export class AppService implements OnModuleInit {
     console.log('🚀 App started, waiting 5 seconds to trigger error...');
 
     setTimeout(() => {
-      const user: any = null;
+      const user: User = null;
       if (user !== null) {
         console.log(user.name);
       } else {
