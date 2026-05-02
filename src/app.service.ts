@@ -2,16 +2,22 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 
 @Injectable()
 export class AppService implements OnModuleInit {
-  getHello(): string {
-    return 'Hello World!';
+  
+  onModuleInit() {
+    console.log('⏳ An asynchronous process is running that will fail after 3 seconds...');
+
+    this.simulatedAsyncOperation();
   }
 
-  onModuleInit() {
-    console.log('🚀 App started, waiting 5 seconds to trigger error...');
+  async simulatedAsyncOperation() {
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(new Error('💥 Catastrophic error: Database connection failed!'));
+      }, 3000);
+    });
+  }
 
-    setTimeout(() => {
-      const user: any = null;
-      console.log(user.name);
-    }, 5000);
+  getHello(): string {
+    return 'Hello World!';
   }
 }
