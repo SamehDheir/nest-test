@@ -12,11 +12,8 @@ export class AppService implements OnModuleInit {
 
     setTimeout(() => {
       const user: any = null;
-      if(user !== null && user !== undefined) {
         console.log(user.name);
-      } else {
-        console.log('User object is null or undefined');
-      }
+     
     }, 5000);
   }
 }
