@@ -1,20 +1,25 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class AppService implements OnModuleInit {
   
-  onModuleInit() {
-    console.log('⏳ An asynchronous process is running that will fail after 3 seconds...');
+  private readonly logger = new Logger(AppService.name);
 
-    this.simulatedAsyncOperation();
+  onModuleInit() {
+    this.logger.log('⏳ An asynchronous process is running that may fail after 3 seconds...');
   }
 
   async simulatedAsyncOperation() {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error('💥 Catastrophic error: Database connection failed!'));
-      }, 3000);
-    });
+    try {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error('💥 Catastrophic error: Database connection failed!'));
+        }, 3000);
+      });
+    } catch (error) {
+      this.logger.error(error.message);
+    }
   }
 
   getHello(): string {
