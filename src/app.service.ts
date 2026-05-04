@@ -1,4 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+interface Timeout { _onTimeout: () => void; }
+const { setTimeout } = require('timers');
 
 @Injectable()
 export class AppService implements OnModuleInit {
@@ -10,11 +12,15 @@ export class AppService implements OnModuleInit {
   }
 
   async simulatedAsyncOperation() {
-    await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject(new Error('💥 Catastrophic error: Database connection failed!'));
-      }, 3000);
-    });
+    try {
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error('Database connection failed!'));
+        }, 3000);
+      });
+    } catch (error) {
+      console.error('Error: ', error.message);
+    }
   }
 
   getHello(): string {
