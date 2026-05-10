@@ -1,13 +1,14 @@
-import { AutoPR } from 'autopr';
+import { Errflow } from 'errflow';
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  AutoPR.init({
-    apiKey: process.env.AUTOPR_API_KEY || '',
-    env: process.env.AUTOPR_ENV || 'production',
+  Errflow.init({
+    apiKey: process.env.ERRFLOW_API_KEY || '',
+    env: process.env.ERRFLOW_ENV || 'production',
+    apiUrl: process.env.ERRFLOW_API_URL,
   });
   await app.listen(process.env.PORT ?? 3002);
 }
